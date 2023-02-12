@@ -13,3 +13,5 @@
         <app-button buttonName="Add new course"></app-button>
     </app-info>
 </ng-container>
+<app-button buttonName="show modal window" (click)="openModal(true)"></app-button>
+<app-modal *ngIf="showModal" (result)="print($event)" title="Message" message="Message Text" okButtonText="ok" cancelButtonText="close"></app-modal>

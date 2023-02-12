@@ -11,4 +11,17 @@ export class CoursesComponent {
   @Input() courses: any[] = [];
   @Input() areEditable: boolean = false;
   @Output() action?: () => void;
+
+  showModal: boolean = false;
+
+  openModal(open: boolean) {
+    this.showModal = open;
+  }
+
+  print(result: string) {
+    if(result) {
+      console.log(result)
+    }
+    this.openModal(false)
+  }
 }
