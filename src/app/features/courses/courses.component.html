@@ -1,0 +1,17 @@
+<app-header>
+    <div class="header">
+        <div class="username">{{username}}</div>
+        <app-button buttonName="logout"></app-button>
+    </div>
+</app-header>
+<app-course-card *ngFor="let courseObj of courses" [isEditable]="areEditable" [course]="courseObj">
+    <app-button iconName="trash-can"></app-button>
+    <app-button iconName="pencil"></app-button>
+</app-course-card>
+<ng-container *ngIf="courses.length === 0">
+    <app-info title="Your List Is Empty" text="Please use ’Add New Course’ button to add your first course">
+        <app-button buttonName="Add new course"></app-button>
+    </app-info>
+</ng-container>
+<app-button buttonName="show modal window" (click)="openModal(true)"></app-button>
+<app-modal *ngIf="showModal" (result)="print($event)" title="Message" message="Message Text" okButtonText="ok" cancelButtonText="close"></app-modal>

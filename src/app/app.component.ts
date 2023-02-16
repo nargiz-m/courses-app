@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { mockedCourseList } from 'src/mockCourseList';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  courses = mockedCourseList;
   title = 'courses-app';
 }
