@@ -7,21 +7,43 @@
         <input
           type="text"
           id="email"
+          [(ngModel)]="model.email"
+          #email="ngModel"
           placeholder="Input text"
+          appEmailInvalid
+          required
+          [ngClass]="submitted ? 'submitted' : 'none'"
         />
+        <div *ngIf="email.invalid && (email.touched || submitted)" class="alert">
+          <div *ngIf="email.errors?.['required']">
+            Email is required.
+          </div>
+          <div *ngIf="!email.errors?.['required'] && email.errors?.['emailInvalid']">
+            Email format is invalid.
+          </div>
+        </div>
       </div>
       <div class="form__control">
         <label for="password">Password</label>
         <input
           type="password"
           id="password"
+          [(ngModel)]="model.password"
+          #password="ngModel"
           placeholder="Input text"
+          required
+          [ngClass]="submitted ? 'submitted' : 'none'"
         />
+        <div *ngIf="password.invalid && (password.touched || submitted)" class="alert">
+          <div *ngIf="password.errors?.['required']">
+            Password is required.
+          </div>
+        </div>
       </div>
     </div>
     <div>
       <div class="form__action">
-        <app-button></app-button>
+        <app-button type="submit" buttonName="Submit" (click)="submit()"></app-button>
       </div>
       <div class="form__text">
         If you don't have an account you may <strong>Registration</strong>

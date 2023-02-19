@@ -6,4 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
+  model = {
+    email: '',
+    password: ''
+  }
+  submitted = false;
+
+  submit () {
+    this.submitted = true;
+  }
 }
