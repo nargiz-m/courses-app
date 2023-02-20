@@ -1,16 +1,11 @@
-import {Pipe, PipeTransform} from '@angular/core'
+import { Pipe, PipeTransform } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Pipe({
-    name: 'creationDate'
+    name: 'creationDatePipe'
 })
 export class CreationDatePipe implements PipeTransform {
-    transform(value?: Date): string {
-        if(!value) {
-            return '';
-        }
-        const day = ('0' + value.getDate()).slice(-2);
-        const month = ('0' + (value.getMonth() + 1)).slice(-2);
-        const year = value.getFullYear();
-        return `${day}.${month}.${year}`;
+    transform(value?: Date): string | null {
+        return new DatePipe('en-US').transform(value, 'dd.MM.YYYY');
     }
 }

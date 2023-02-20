@@ -5,5 +5,13 @@
 
   & input {
     margin-right: 24px;
+    height: 44px;
+    width: 100%;
+    border: solid 1px #CFCFCF;
+    border-radius: 4px;
+  
+    &.ng-invalid.ng-touched, &.ng-invalid.submitted {
+      border-color: red;
+    }
   }
 }

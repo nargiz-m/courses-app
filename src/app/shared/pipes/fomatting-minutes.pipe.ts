@@ -19,5 +19,4 @@ export class FomattingMinutesPipe implements PipeTransform {
     }
     return `${hours}:${minutes} hour`;
   }
-
 }
