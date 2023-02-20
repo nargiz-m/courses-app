@@ -1,34 +1,67 @@
 <h2 class="text-align-center">Registration</h2>
 <div class="app-plate">
   <div class="registration-form">
-    <div>
+    <form [formGroup]="registrationForm">
       <div class="form__control">
         <label for="name">Name</label>
         <input
           type="text"
           id="name"
+          formControlName="name"
+          required
           placeholder="Input text"
+          [ngClass]="submitted ? 'submitted' : 'none'"
         />
+        <div *ngIf="name?.invalid && (name?.touched || submitted)" class="alert">
+          <div *ngIf="name?.errors?.['required']">
+            Name is required.
+          </div>
+          <div *ngIf="name?.errors?.['minlength']">
+            Name must be at least 6 characters long.
+          </div>
+        </div>
       </div>
       <div class="form__control">
         <label for="email">Email</label>
         <input
           type="text"
           id="email"
+          formControlName="email"
+          required
           placeholder="Input text"
+          [ngClass]="submitted ? 'submitted' : 'none'"
         />
+        <div *ngIf="email?.invalid && (email?.touched || submitted)" class="alert">
+          <div *ngIf="email?.errors?.['required']">
+            Email is required.
+          </div>
+          <div *ngIf="!email?.errors?.['required'] && email?.errors?.['emailInvalid']">
+            Email format is incorrect.
+          </div>
+        </div>
       </div>
       <div class="form__control">
         <label for="password">Password</label>
         <input
           type="password"
           id="password"
+          formControlName="password"
+          required
           placeholder="Input text"
+          [ngClass]="submitted ? 'submitted' : 'none'"
         />
+        <div *ngIf="password?.invalid && (password?.touched || submitted)" class="alert">
+          <div *ngIf="password?.errors?.['required']">
+            Password is required.
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form__action">
-      <app-button></app-button>
-    </div>
+      <div class="form__action">
+        <app-button (click)="onSubmit()" buttonName="login"></app-button>
+      </div>
+      <div class="form__text">
+        If you have an account you may <strong>Login</strong>
+      </div>
+    </form>
   </div>
 </div>
