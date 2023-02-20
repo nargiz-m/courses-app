@@ -39,24 +39,29 @@
       </div>
       <div class="separator"></div>
       <h3>Authors</h3>
-      <div class="form__control">
+      <div class="form__control" formGroupName="newAuthor">
         <div class="course__flex">
           <input
             type="text"
             id="author"
-            formControlName="newAuthor"
+            formControlName="name"
             [ngClass]="submitted ? 'submitted' : 'none'"
             placeholder="Input Author Name"
           />
-          <app-button buttonName="create author"></app-button>
+          <app-button buttonName="create author" (click)="addAuthor()"></app-button>
         </div>
-        <div *ngIf="newAuthor?.invalid && (newAuthor?.touched || submitted)" class="alert">
-          <div *ngIf="newAuthor?.errors?.['nameInvalid']">
+        <div *ngIf="name?.invalid && (name?.touched || submitted)" class="alert">
+          <div *ngIf="name?.errors?.['nameInvalid']">
             Name format is incorrect.
           </div>
         </div>
         <div class="course__authors">
-          ::Authors::
+          <div>Author list</div>
+          <div class="authors_list">
+            <div *ngFor="let author of authors.controls" class="author_name">
+              {{author.value?.name}}
+            </div>
+          </div>
         </div>
       </div>
       <div class="separator"></div>
@@ -73,7 +78,7 @@
             min="0"
           />
           <div class="course__duration">
-            ::Duration::
+            {{duration?.value || 0 | fomattingMinutes}}
           </div>
         </div>
         <div *ngIf="duration?.invalid && (duration?.touched || submitted)" class="alert">

@@ -23,6 +23,7 @@
   &__authors {
     margin-top: 8px;
     display: flex;
+    flex-direction: column;
 
     &-item {
       margin-right: 10px;
@@ -43,4 +44,13 @@
   app-button {
     margin-left: 15px;
   }
+}
+
+.authors_list {
+  display: flex;
+  flex-direction: row;
+}
+
+.author_name {
+  margin-right: 5px;
 }

@@ -10,7 +10,7 @@
               {{authors}}
             </div>
             <div><b>Duration: </b>{{duration && (duration | fomattingMinutes)}}</div>
-            <div><b>Created: </b>{{creationDate | date: 'dd.MM.yyyy'}}</div>
+            <div><b>Created: </b>{{creationDate | creationDate}}</div>
         </div>
         <div class="course-card__info-actions">
             <app-button buttonName="show course"></app-button>

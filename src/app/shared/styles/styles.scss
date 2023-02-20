@@ -31,6 +31,8 @@ $color-red: #FF0000;
 
         textarea {
           resize: none;
+          border: solid 1px #CFCFCF;
+          border-radius: 4px;
 
           &.ng-invalid.ng-touched, &.ng-invalid.submitted {
             border-color: $color-red;
@@ -65,10 +67,10 @@ $color-red: #FF0000;
 }
 
 .separator {
-    width: 100%;
-    border-bottom: 1px solid $color-gray;
+  width: 100%;
+  border-bottom: 1px solid $color-gray;
 }
 
 .alert {
-    color: $color-red;
+  color: $color-red;
 }

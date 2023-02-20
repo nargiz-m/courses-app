@@ -15,6 +15,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FomattingMinutesPipe } from './pipes/fomatting-minutes.pipe';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
+import { CreationDatePipe } from './pipes/creation-date.pipe';
 
 const components = [
   HeaderComponent,
@@ -29,7 +30,7 @@ const components = [
 ];
 
 @NgModule({
-  declarations: [components, FomattingMinutesPipe, EmailValidatorDirective],
+  declarations: [components, FomattingMinutesPipe, CreationDatePipe, EmailValidatorDirective],
   imports: [
     CommonModule,
     FontAwesomeModule,
