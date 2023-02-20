@@ -7,30 +7,6 @@
   align-items: center;
 }
 
-.form__control {
-  display: flex;
-  flex-direction: column;
-
-  input {
-    height: 50px;
-    width: 286px;
-    border: solid 1px #CFCFCF;
-    border-radius: 4px;
-
-    &.ng-invalid.ng-touched, &.ng-invalid.submitted {
-      border-color: red;
-    }
-  }
-
-  label {
-    font-weight: bold;
-  }
-}
-
-.alert {
-  color: red;
-}
-
 .form__text {
   width: 260px;
 }
