@@ -11,8 +11,13 @@ export class LoginFormComponent {
     password: ''
   }
   submitted = false;
+  showPassword = false;
 
   submit () {
     this.submitted = true;
+  }
+
+  toggleShowPassword () {
+    this.showPassword = !this.showPassword;
   }
 }
