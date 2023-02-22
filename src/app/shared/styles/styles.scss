@@ -26,6 +26,33 @@ $color-red: #FF0000;
 .form {
     &__control {
         margin-bottom: 24px;
+        display: flex;
+        flex-direction: column;
+
+        textarea {
+          resize: none;
+          border: solid 1px #CFCFCF;
+          border-radius: 4px;
+
+          &.ng-invalid.ng-touched, &.ng-invalid.submitted {
+            border-color: $color-red;
+          }
+        }
+    
+        input {
+          height: 50px;
+          width: 286px;
+          border: solid 1px #CFCFCF;
+          border-radius: 4px;
+        
+          &.ng-invalid.ng-touched, &.ng-invalid.submitted {
+            border-color: $color-red;
+          }
+        }
+    
+        label {
+          font-weight: bold;
+        }
     }
 
     &__action {
@@ -35,11 +62,15 @@ $color-red: #FF0000;
     &__text {
         text-align: center;
         margin-top: 38px;
-      flex-wrap: wrap;
+        flex-wrap: wrap;
     }
 }
 
 .separator {
-    width: 100%;
-    border-bottom: 1px solid $color-gray;
+  width: 100%;
+  border-bottom: 1px solid $color-gray;
+}
+
+.alert {
+  color: $color-red;
 }

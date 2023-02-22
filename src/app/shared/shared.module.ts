@@ -14,6 +14,9 @@ import {
 } from "./components";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FomattingMinutesPipe } from './pipes/fomatting-minutes.pipe';
+import { EmailValidatorDirective } from './directives/email-validator.directive';
+import { CreationDatePipe } from './pipes/creation-date.pipe';
+import { PasswordToggleDirective } from './directives/password-toggle.directive';
 
 const components = [
   HeaderComponent,
@@ -28,7 +31,7 @@ const components = [
 ];
 
 @NgModule({
-  declarations: [components, FomattingMinutesPipe],
+  declarations: [components, FomattingMinutesPipe, CreationDatePipe, EmailValidatorDirective, PasswordToggleDirective],
   imports: [
     CommonModule,
     FontAwesomeModule,

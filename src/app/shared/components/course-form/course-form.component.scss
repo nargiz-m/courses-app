@@ -5,7 +5,6 @@
 
   &__flex {
     display: flex;
-    justify-content: space-between;
     align-items: baseline;
 
     & input {
@@ -24,6 +23,7 @@
   &__authors {
     margin-top: 8px;
     display: flex;
+    flex-direction: column;
 
     &-item {
       margin-right: 10px;
@@ -34,4 +34,23 @@
     margin-left: 4px;
     cursor: pointer;
   }
+}
+
+.form__action {
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-end;
+
+  app-button {
+    margin-left: 15px;
+  }
+}
+
+.authors_list {
+  display: flex;
+  flex-direction: row;
+}
+
+.author_name {
+  margin-right: 5px;
 }
