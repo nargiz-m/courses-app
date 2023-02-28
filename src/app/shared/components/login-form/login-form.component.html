@@ -52,9 +52,8 @@
         <app-button type="submit" buttonName="Submit" (click)="submit()"></app-button>
       </div>
       <div class="form__text">
-        If you don't have an account you may <a routerLink="../registration">Registration</a>
+        If you don't have an account you may <a [routerLink]="['..', 'registration']">Registration</a>
       </div>
     </div>
   </div>
 </div>
-<router-outlet></router-outlet>

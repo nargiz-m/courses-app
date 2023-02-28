@@ -5,7 +5,7 @@
     </div>
     <ng-template #elseBlock>
         <div class="header">
-            <app-button buttonName="login" routerLink="/login"></app-button>
+            <app-button buttonName="login" [routerLink]="['..', 'login']"></app-button>
         </div>
     </ng-template>
 </app-header>
@@ -21,4 +21,3 @@
 </ng-container>
 <app-button buttonName="show modal window" (click)="openModal(true)"></app-button>
 <app-modal *ngIf="showModal" (result)="print($event)" title="Message" message="Message Text" okButtonText="ok" cancelButtonText="close"></app-modal>
-<router-outlet></router-outlet>
