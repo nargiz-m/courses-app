@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CourseComponent } from './features/course/course.component';
-import { CoursesComponent } from './features/courses/courses.component';
-import { LoginComponent } from './features/login/login.component';
-import { RegistrationComponent } from './features/registration/registration.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/courses', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, },
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'courses', component: CoursesComponent, },
-  { path: 'courses/add', component: CourseComponent, },
-  { path: 'courses/edit/:id', component: CourseComponent, },
-  { path: 'courses/:id', component: CourseComponent, },
+  { path: '', component: AppComponent, children: [
+    { path: 'login', loadChildren: () => import('./features/login/login.module').then((m) => m.LoginModule), },
+    { path: 'registration', loadChildren: () => import('./features/registration/registration.module').then((m) => m.RegistrationModule), },
+    { path: 'courses', loadChildren: () => import('./features/courses/courses.module').then((m) => m.CoursesModule), },
+    { path: 'courses/add', loadChildren: () => import('./features/course/course.module').then((m) => m.CourseModule), },
+    { path: 'courses/edit/:id', loadChildren: () => import('./features/course/course.module').then((m) => m.CourseModule), },
+    { path: 'courses/:id', loadChildren: () => import('./features/course/course.module').then((m) => m.CourseModule), },
+    { path: '', redirectTo: '/courses', pathMatch: 'full'}
+  ]}
 ];
 
 @NgModule({
