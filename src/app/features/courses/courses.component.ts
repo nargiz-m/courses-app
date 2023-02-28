@@ -1,4 +1,5 @@
 import { Input, Component, Output } from '@angular/core';
+import { mockedCourseList } from 'src/mockCourseList';
 
 @Component({
   selector: 'app-courses',
@@ -6,10 +7,10 @@ import { Input, Component, Output } from '@angular/core';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent {
-  @Input() username: string = 'Harry Potter';
+  @Input() username?: string;
   
-  @Input() courses: any[] = [];
-  @Input() areEditable: boolean = false;
+  @Input() courses: any[] = mockedCourseList;
+  @Input() areEditable: boolean = true;
   @Output() action?: () => void;
 
   showModal: boolean = false;

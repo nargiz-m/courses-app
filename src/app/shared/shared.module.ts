@@ -17,6 +17,7 @@ import { FomattingMinutesPipe } from './pipes/fomatting-minutes.pipe';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
 import { CreationDatePipe } from './pipes/creation-date.pipe';
 import { PasswordToggleDirective } from './directives/password-toggle.directive';
+import { AppRoutingModule } from '../app-routing.module';
 
 const components = [
   HeaderComponent,
@@ -37,6 +38,7 @@ const components = [
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule
   ],
   exports: [components]
 })

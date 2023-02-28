@@ -13,8 +13,9 @@
             <div><b>Created: </b>{{creationDate | creationDatePipe}}</div>
         </div>
         <div class="course-card__info-actions">
-            <app-button buttonName="show course"></app-button>
+            <app-button buttonName="show course" [routerLink]="['/courses', course.id]"></app-button>
             <ng-content *ngIf="isEditable"></ng-content>
         </div>
     </div>
 </div>
+<router-outlet></router-outlet>
