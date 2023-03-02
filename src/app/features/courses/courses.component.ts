@@ -1,4 +1,5 @@
 import { Input, Component, Output } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { mockedCourseList } from 'src/mockCourseList';
 
 @Component({
@@ -15,6 +16,8 @@ export class CoursesComponent {
 
   showModal: boolean = false;
 
+  constructor(private authService: AuthService){}
+
   openModal(open: boolean) {
     this.showModal = open;
   }
@@ -24,5 +27,9 @@ export class CoursesComponent {
       console.log(result)
     }
     this.openModal(false)
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

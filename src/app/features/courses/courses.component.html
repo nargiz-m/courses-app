@@ -1,7 +1,7 @@
 <app-header>
     <div class="header" *ngIf="username; else elseBlock">
         <div class="username">{{username}}</div>
-        <app-button buttonName="logout"></app-button>
+        <app-button buttonName="logout" (click)="logout"></app-button>
     </div>
     <ng-template #elseBlock>
         <div class="header">
