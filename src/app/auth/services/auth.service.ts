@@ -1,6 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, filter, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { SessionStorageService } from './session-storage.service';
 
 type AuthResponse = {
@@ -15,10 +15,6 @@ export class AuthService {
   public isAuthorized$ = this.isAuthorized$$.asObservable();
   public isAuthorized = false;
   constructor( private httpClient: HttpClient, private sessionService: SessionStorageService ) {}
-
-  get isUserAuthorized() {
-    return this.isAuthorized$$.getValue();
-  }
 
   login(loginInfo: string) {
     this.httpClient.post<AuthResponse>('http://localhost:4000/login', loginInfo, {
