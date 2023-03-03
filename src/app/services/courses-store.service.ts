@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CoursesService } from './courses.service';
 
 @Injectable({
@@ -10,19 +10,19 @@ export class CoursesStoreService {
   private courses$$ = new BehaviorSubject<any[]>([]);
   
   public isLoading$ = this.isLoading$$.asObservable();
-  public courses$ = this.isLoading$$.asObservable();
+  public courses$ = this.courses$$.asObservable();
   
   constructor(private coursesService: CoursesService) { }
 
   getAll(){
     this.isLoading$$.next(true);
-    this.courses$$.next(this.coursesService.getAll())
+    this.coursesService.getAll().subscribe((data) => this.courses$$.next(data.result))    
     this.isLoading$$.next(false);
   }
 
   searchCourses(searchTerm: string){
-    this.isLoading$$.next(true);
-    this.courses$$.next(this.coursesService.searchCourses(searchTerm))
+    this.isLoading$$.next(true);    
+    this.coursesService.searchCourses(searchTerm).subscribe((data) => this.courses$$.next(data.result))    
     this.isLoading$$.next(false);
   }
 
@@ -35,7 +35,9 @@ export class CoursesStoreService {
   }
   
   getCourse(id: string): any {
-    this.coursesService.getCourse(id)
+    this.isLoading$$.next(true);
+    this.coursesService.getCourse(id).subscribe((data) => this.courses$$.next([data.result]))  
+    this.isLoading$$.next(false);
   }
 
   deleteCourse(id: string){

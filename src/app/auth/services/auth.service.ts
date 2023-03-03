@@ -13,7 +13,6 @@ type AuthResponse = {
 export class AuthService {
   private isAuthorized$$ = new BehaviorSubject<boolean>(this.sessionService.getToken !== undefined);
   public isAuthorized$ = this.isAuthorized$$.asObservable();
-  public isAuthorized = false;
   constructor( private httpClient: HttpClient, private sessionService: SessionStorageService ) {}
 
   login(loginInfo: string) {

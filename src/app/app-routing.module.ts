@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthorizedGuard } from './auth/guards/authorized.guard';
 import { NotAuthorizedGuard } from './auth/guards/not-authorized.guard';
+import { AdminGuard } from './user/guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: AppComponent, children: [
@@ -19,9 +20,11 @@ const routes: Routes = [
       path: 'courses', 
       loadChildren: () => import('./features/courses/courses.module').then((m) => m.CoursesModule), 
     }, { 
+      canActivate: [AdminGuard],
       path: 'courses/add', 
       loadChildren: () => import('./features/course/course.module').then((m) => m.CourseModule), 
     }, { 
+      canActivate: [AdminGuard],
       path: 'courses/edit/:id', 
       loadChildren: () => import('./features/course/course.module').then((m) => m.CourseModule), 
     }, { 

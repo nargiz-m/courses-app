@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 type Response = {
   result: any[],
@@ -10,18 +11,15 @@ type Response = {
   providedIn: 'root'
 })
 export class CoursesService {
+  courses?: any[];
   constructor(private httpClient: HttpClient) { }
 
-  getAll(): any[] {
-    let courses: any[] = [];
-    this.httpClient.get<Response>('http://localhost:4000/courses/all').subscribe(data => courses = data.result);
-    return courses;
+  getAll(): Observable<any> {
+    return this.httpClient.get<Response>('http://localhost:4000/courses/all');
   }
 
-  searchCourses(searchTerm: string): any[] {
-    let courses: any[] = [];
-    this.httpClient.get<Response>(`http://localhost:4000/courses/filter?title=${searchTerm}`).subscribe(data => courses = data.result);
-    return courses;
+  searchCourses(searchTerm: string): Observable<any> {
+    return this.httpClient.get<Response>(`http://localhost:4000/courses/filter?title=${searchTerm}`);
   }
 
   createCourse(courseInfo: any){
@@ -32,10 +30,8 @@ export class CoursesService {
     this.httpClient.put<Response>(`http://localhost:4000/courses/${id}`, JSON.stringify(courseInfo)).subscribe()
   }
   
-  getCourse(id: string): any {
-    let course: any;
-    this.httpClient.get<Response>(`http://localhost:4000/courses/${id}`).subscribe(data => data.successful ? course = data.result : console.log(data.result));
-    return course;
+  getCourse(id: string): Observable<any> {
+    return this.httpClient.get<Response>(`http://localhost:4000/courses/${id}`);
   }
 
   deleteCourse(id: string){
