@@ -26,7 +26,11 @@ export class UserService {
     return this.httpClient.get<Response>(`http://localhost:4000/authors/${id}`);
   }
 
-  addAuthor(author: string) {
-    this.httpClient.post<Response>('http://localhost:4000/authors/add', author).subscribe((data) => console.log(data))
+  addAuthor(author: string): Observable<any> {
+    return this.httpClient.post<Response>('http://localhost:4000/authors/add', author, {
+      headers: {
+        "Authorization": this.sessionService.getToken()
+      }
+    });
   }
 }

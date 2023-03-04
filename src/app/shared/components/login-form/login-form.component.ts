@@ -17,8 +17,8 @@ export class LoginFormComponent {
   constructor (private authService: AuthService) {}
   
   submit () {
-    this.authService.login(JSON.stringify(this.model));
     this.submitted = true;
+    this.authService.login(JSON.stringify(this.model));
   }
 
   toggleShowPassword () {

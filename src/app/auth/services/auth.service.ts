@@ -11,7 +11,7 @@ type AuthResponse = {
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthorized$$ = new BehaviorSubject<boolean>(this.sessionService.getToken !== undefined);
+  private isAuthorized$$ = new BehaviorSubject<boolean>(this.sessionService.getToken().length > 0);
   public isAuthorized$ = this.isAuthorized$$.asObservable();
   constructor( private httpClient: HttpClient, private sessionService: SessionStorageService ) {}
 
@@ -24,6 +24,7 @@ export class AuthService {
       .subscribe(data => {
         this.sessionService.setToken(data.result)
         this.isAuthorized$$.next(true);
+        window.location.reload();
       })
   }
 
@@ -36,10 +37,11 @@ export class AuthService {
       .subscribe(() => {
         this.sessionService.deleteToken()
         this.isAuthorized$$.next(false)
+        window.location.reload();
       })
   }
   
-  register(registerInfo: string) {
+  register(registerInfo: any) {
     this.httpClient.post('http://localhost:4000/register', registerInfo)
       .subscribe(() => this.login(registerInfo))
   }

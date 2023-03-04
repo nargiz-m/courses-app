@@ -9,7 +9,7 @@ import { UserStoreService } from '../services/user-store.service';
 export class AdminGuard implements CanActivate {
   constructor(private userStoreService: UserStoreService, private router: Router) {}
   canActivate(): Observable<boolean | UrlTree> {
-    return this.userStoreService.isAdmin$.pipe(map(data => { 
+    return this.userStoreService.isAdmin$.pipe(map(data => {
       if(data) {
         return data;
       }

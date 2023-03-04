@@ -1,7 +1,7 @@
 import { Input, Component, Output, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CoursesStoreService } from 'src/app/services/courses-store.service';
-import { mockedCourseList } from 'src/mockCourseList';
+import { UserStoreService } from 'src/app/user/services/user-store.service';
 
 @Component({
   selector: 'app-courses',
@@ -16,10 +16,14 @@ export class CoursesComponent implements OnInit {
   @Output() action?: () => void;
 
   showModal: boolean = false;
+  currentId?: string;
 
-  constructor(private authService: AuthService, private coursesStore: CoursesStoreService) {}
+  constructor(private authService: AuthService, private coursesStore: CoursesStoreService, private userStore: UserStoreService) {}
 
   ngOnInit() {
+    this.userStore.getUser();
+    this.userStore.name$.subscribe((data) => this.username = data)
+    this.userStore.isAdmin$.subscribe((data) => this.areEditable = data)
     this.coursesStore.getAll();
     this.coursesStore.courses$.subscribe((data) => this.courses = data);
   }
@@ -28,11 +32,22 @@ export class CoursesComponent implements OnInit {
     this.showModal = open;
   }
 
-  print(result: string) {
-    if(result) {
-      console.log(result)
+  searchCourse(searchTerm: string) {
+    this.coursesStore.searchCourses(searchTerm);
+  }
+
+  deleteCourse(result: boolean) {
+    if(result && this.currentId) {
+      this.coursesStore.deleteCourse(this.currentId)
+      window.location.reload();
     }
     this.openModal(false)
+    this.currentId = undefined;
+  }
+
+  removeCourse(id: string) {
+    this.currentId = id;
+    this.openModal(true)
   }
 
   logout() {

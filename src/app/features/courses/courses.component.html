@@ -1,7 +1,7 @@
 <app-header>
     <div class="header" *ngIf="username; else elseBlock">
         <div class="username">{{username}}</div>
-        <app-button buttonName="logout" (click)="logout"></app-button>
+        <app-button buttonName="logout" (click)="logout()"></app-button>
     </div>
     <ng-template #elseBlock>
         <div class="header">
@@ -9,15 +9,14 @@
         </div>
     </ng-template>
 </app-header>
-<app-search placeholder="Input text" (searchResult)="print($event)"></app-search>
+<app-search placeholder="Input text" (searchResult)="searchCourse($event)"></app-search>
 <app-course-card *ngFor="let courseObj of courses" [isEditable]="areEditable" [course]="courseObj">
-    <app-button iconName="trash-can"></app-button>
+    <app-button iconName="trash-can" (click)="removeCourse(courseObj.id)"></app-button>
     <app-button iconName="pencil" [routerLink]="['/courses/edit', courseObj.id]"></app-button>
 </app-course-card>
-<ng-container *ngIf="courses.length === 0">
+<ng-container *ngIf="courses.length === 0 && areEditable">
     <app-info title="Your List Is Empty" text="Please use ’Add New Course’ button to add your first course">
         <app-button buttonName="Add new course" routerLink="/courses/add"></app-button>
     </app-info>
 </ng-container>
-<app-button buttonName="show modal window" (click)="openModal(true)"></app-button>
-<app-modal *ngIf="showModal" (result)="print($event)" title="Message" message="Message Text" okButtonText="ok" cancelButtonText="close"></app-modal>
+<app-modal *ngIf="showModal" (result)="deleteCourse($event)" title="Course Deletion" message="Are you sure you want to delete the course? This action cannot be reversed" okButtonText="proceed" cancelButtonText="cancel"></app-modal>

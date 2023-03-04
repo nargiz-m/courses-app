@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -7,13 +8,13 @@ import { AuthService } from '../services/auth.service';
 })
 export class NotAuthorizedGuard implements CanActivate {
   constructor( private authService: AuthService, private router: Router ) {}
-  canActivate(): boolean | UrlTree {
-    let load = true;
-    this.authService.isAuthorized$.subscribe((data) => load = !data as boolean);
-    if(load) {
-      return load
-    }
-    return this.router.parseUrl('/courses')
+  canActivate(): Observable<boolean | UrlTree> {
+    return this.authService.isAuthorized$.pipe(map((data) => {
+      if(!data) {
+        return !data
+      }
+      return this.router.parseUrl('/courses')
+    }));
   }
   
 }

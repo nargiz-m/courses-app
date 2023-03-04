@@ -25,7 +25,7 @@ export class UserStoreService {
     return this.userService.getAuthor(id);
   }
 
-  addAuthor(author: string) {
-    this.userService.addAuthor(author);
+  addAuthor(author: string): Observable<any> {
+    return this.userService.addAuthor(author);
   }
 }

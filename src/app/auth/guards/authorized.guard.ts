@@ -9,12 +9,12 @@ import { AuthService } from '../services/auth.service';
 export class AuthorizedGuard implements CanMatch {
   constructor(private authService: AuthService, private router: Router) {}
   
-  canMatch(): boolean | UrlTree {
-    let load = false;
-    this.authService.isAuthorized$.subscribe((data) => load = data as boolean);
-    if(load) {
-      return load;
-    }
-    return this.router.parseUrl('/login');;
+  canMatch(): Observable<boolean | UrlTree> {
+    return this.authService.isAuthorized$.pipe(map((data) => {
+      if(data) {
+        return data;
+      }
+      return this.router.parseUrl('/login');
+    }));
   }
 }

@@ -22,7 +22,11 @@ export class CoursesStoreService {
 
   searchCourses(searchTerm: string){
     this.isLoading$$.next(true);    
-    this.coursesService.searchCourses(searchTerm).subscribe((data) => this.courses$$.next(data.result))    
+    if(searchTerm) {
+      this.coursesService.searchCourses(searchTerm).subscribe((data) => this.courses$$.next(data.result))
+    } else {
+      this.coursesService.getAll().subscribe((data) => this.courses$$.next(data.result))
+    } 
     this.isLoading$$.next(false);
   }
 
