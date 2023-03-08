@@ -91,8 +91,8 @@
         </div>
       </div>
       <div class="form__action">
-        <app-button buttonName="cancel"></app-button>
-        <app-button buttonName="create course" (click)="onSubmit()"></app-button>
+        <app-button buttonName="cancel" [routerLink]="['/']"></app-button>
+        <app-button [buttonName]="submitBtnName" (click)="onSubmit()"></app-button>
       </div>
     </div>
   </div>

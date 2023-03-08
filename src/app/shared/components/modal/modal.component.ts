@@ -12,13 +12,13 @@ export class ModalComponent {
   @Input() message?: string;
   @Input() okButtonText?: string;
   @Input() cancelButtonText?: string;
-  @Output() result = new EventEmitter<string>();
+  @Output() result = new EventEmitter<boolean>();
 
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);
   }
 
-  sendResult(result?: string) {
+  sendResult(result?: boolean) {
     this.result.emit(result)
   }
 }

@@ -1,8 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoursesModule } from './features/courses/courses.module';
 
 @NgModule({
   declarations: [
@@ -10,9 +10,10 @@ import { CoursesModule } from './features/courses/courses.module';
   ],
   imports: [
     BrowserModule,
-    CoursesModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: Window, useValue: window }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

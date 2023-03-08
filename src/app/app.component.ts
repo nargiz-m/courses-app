@@ -6,7 +6,4 @@ import { mockedCourseList } from 'src/mockCourseList';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  courses = mockedCourseList;
-  title = 'courses-app';
-}
+export class AppComponent {}

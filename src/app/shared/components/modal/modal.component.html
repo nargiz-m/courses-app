@@ -3,16 +3,16 @@
         <div class="modal__title">
             <div>{{title}}</div>
             <div class="modal__icon">
-                <app-button iconName="xmark" (click)="sendResult()"></app-button>
+                <app-button iconName="xmark" (click)="sendResult(false)"></app-button>
             </div>
         </div>
         <div class="modal__message">{{message}}</div>
         <div class="modal__actions">
             <div class="modal__btn">
-                <app-button [buttonName]="okButtonText" (click)="sendResult('ok')"></app-button>
+                <app-button [buttonName]="okButtonText" (click)="sendResult(true)"></app-button>
             </div>
             <div class="modal__btn">
-                <app-button [buttonName]="cancelButtonText" (click)="sendResult('cancel')"></app-button>
+                <app-button [buttonName]="cancelButtonText" (click)="sendResult(false)"></app-button>
             </div>
         </div>
     </div>
