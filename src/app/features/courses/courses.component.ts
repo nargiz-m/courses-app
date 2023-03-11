@@ -1,6 +1,6 @@
 import { Input, Component, Output, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { CoursesStoreService } from 'src/app/services/courses-store.service';
+import { CoursesStateFacade } from 'src/app/store/courses/courses.facade';
 import { UserStoreService } from 'src/app/user/services/user-store.service';
 
 @Component({
@@ -18,14 +18,14 @@ export class CoursesComponent implements OnInit {
   showModal: boolean = false;
   currentId?: string;
 
-  constructor(private authService: AuthService, private coursesStore: CoursesStoreService, private userStore: UserStoreService) {}
+  constructor(private authService: AuthService, private coursesStore: CoursesStateFacade, private userStore: UserStoreService) {}
 
   ngOnInit() {
     this.userStore.getUser();
     this.userStore.name$.subscribe((data) => this.username = data)
     this.userStore.isAdmin$.subscribe((data) => this.areEditable = data)
-    this.coursesStore.getAll();
-    this.coursesStore.courses$.subscribe((data) => this.courses = data);
+    this.coursesStore.getAllCourses();
+    this.coursesStore.allCourses$.subscribe((data: any) => this.courses = data.result ?? []);
   }
   
   openModal(open: boolean) {
@@ -33,7 +33,7 @@ export class CoursesComponent implements OnInit {
   }
 
   searchCourse(searchTerm: string) {
-    this.coursesStore.searchCourses(searchTerm);
+    this.coursesStore.getFilteredCourses(searchTerm);
   }
 
   deleteCourse(result: boolean) {

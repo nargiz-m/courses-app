@@ -17,7 +17,7 @@ export class UserStoreService {
   getUser() {
     this.userService.getUser().subscribe((data) => {
       this.name$$.next(data.result.name)
-      this.isAdmin$$.next(data.result.role === 'admin')
+      this.isAdmin$$.next(data.result.role !== 'admin')
     })
   }
 

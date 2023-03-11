@@ -20,34 +20,37 @@ export class CoursesService {
   }
 
   searchCourses(searchTerm: string): Observable<any> {
-    return this.httpClient.get<Response>(`http://localhost:4000/courses/filter?title=${searchTerm}`);
+    if(searchTerm) {
+      return this.httpClient.get<Response>(`http://localhost:4000/courses/filter?title=${searchTerm}`);
+    }
+    return this.getAll();
   }
 
-  createCourse(courseInfo: any){
-    this.httpClient.post<Response>('http://localhost:4000/courses/add', courseInfo, {
+  createCourse(courseInfo: any): Observable<any> {
+    return this.httpClient.post<Response>('http://localhost:4000/courses/add', courseInfo, {
       headers: {
         "Authorization": this.sessionService.getToken()
       }
-    }).subscribe();
+    });
   }
 
-  editCourse(id: string, courseInfo: any){
-    this.httpClient.put<Response>(`http://localhost:4000/courses/${id}`, courseInfo, {
+  editCourse(id: string, courseInfo: any): Observable<any> {
+    return this.httpClient.put<Response>(`http://localhost:4000/courses/${id}`, courseInfo, {
       headers: {
         "Authorization": this.sessionService.getToken()
       }
-    }).subscribe()
+    })
   }
   
   getCourse(id: string): Observable<any> {
     return this.httpClient.get<Response>(`http://localhost:4000/courses/${id}`);
   }
 
-  deleteCourse(id: string){
-    this.httpClient.delete<Response>(`http://localhost:4000/courses/${id}`, {
+  deleteCourse(id: string): Observable<any> {
+    return this.httpClient.delete<Response>(`http://localhost:4000/courses/${id}`, {
       headers: {
         "Authorization": this.sessionService.getToken()
       }
-    }).subscribe();
+    });
   }
 }
