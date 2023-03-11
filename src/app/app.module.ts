@@ -7,7 +7,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { effects, reducers } from './store';
+import { AuthStateModule } from './store/auth/auth.module';
 import { CoursesStateModule } from './store/courses/courses.module';
+import { UserStateModule } from './store/user/user.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CoursesStateModule } from './store/courses/courses.module';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),
-    CoursesStateModule
+    CoursesStateModule,
+    UserStateModule,
+    AuthStateModule
   ],
   providers: [{ provide: Window, useValue: window }],
   bootstrap: [AppComponent]
