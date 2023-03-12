@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthStateFacade } from 'src/app/store/auth/auth.facade';
 
 @Component({
   selector: 'app-login-form',
@@ -14,7 +14,7 @@ export class LoginFormComponent {
   submitted = false;
   showPassword = false;
 
-  constructor (private authService: AuthService) {}
+  constructor (private authService: AuthStateFacade) {}
   
   submit () {
     this.submitted = true;
