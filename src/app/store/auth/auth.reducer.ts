@@ -9,7 +9,7 @@ export interface AuthState {
 }
 
 export const initialState: AuthState = {
-    isAuthorized: false,
+    isAuthorized: sessionStorage.getItem('token') != undefined,
     errorMessage: undefined
 }
 

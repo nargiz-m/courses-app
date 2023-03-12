@@ -1,7 +1,7 @@
 import { Input, Component, Output, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthStateFacade } from 'src/app/store/auth/auth.facade';
 import { CoursesStateFacade } from 'src/app/store/courses/courses.facade';
-import { UserStoreService } from 'src/app/user/services/user-store.service';
+import { UserStateFacade } from 'src/app/store/user/user.facade';
 
 @Component({
   selector: 'app-courses',
@@ -18,7 +18,7 @@ export class CoursesComponent implements OnInit {
   showModal: boolean = false;
   currentId?: string;
 
-  constructor(private authService: AuthService, private coursesStore: CoursesStateFacade, private userStore: UserStoreService) {}
+  constructor(private authService: AuthStateFacade, private coursesStore: CoursesStateFacade, private userStore: UserStateFacade) {}
 
   ngOnInit() {
     this.userStore.getUser();

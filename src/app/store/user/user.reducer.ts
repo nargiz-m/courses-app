@@ -44,8 +44,9 @@ const reduce = createReducer(initialState,
     on(UserActions.requestAddAuthor, (state) => ({
         ...state,
     })),
-    on(UserActions.requestAddAuthorSuccess, (state) => ({
+    on(UserActions.requestAddAuthorSuccess, (state, { author }) => ({
         ...state,
+        author: author,
     })),
     on(UserActions.requestAddAuthorFail, (state, { error }) => ({
         ...state,

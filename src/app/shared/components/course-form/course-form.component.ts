@@ -6,7 +6,7 @@ import {
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { CoursesStateFacade } from 'src/app/store/courses/courses.facade';
-import { UserStoreService } from 'src/app/user/services/user-store.service';
+import { UserStateFacade } from 'src/app/store/user/user.facade';
 import { nameValidator } from '../../utils/name-validator.directive';
 
 @Component({
@@ -15,23 +15,25 @@ import { nameValidator } from '../../utils/name-validator.directive';
   styleUrls: ['./course-form.component.scss'],
 })
 export class CourseFormComponent implements OnInit {
-  constructor(public fb: FormBuilder, public library: FaIconLibrary, private courseService: CoursesStateFacade, private userService: UserStoreService) {
+  constructor(public fb: FormBuilder, public library: FaIconLibrary, private courseService: CoursesStateFacade, private userService: UserStateFacade) {
     library.addIconPacks(fas);
   }
 
   ngOnInit() {
     const courseId = window.location.pathname.split('/').pop();
-    const authors: string[] = [];
     if(courseId && courseId != 'add') {
       this.courseService.getSingleCourse(courseId);
       this.courseService.course$.subscribe((data) => {
-        if(data?.result) {
+        if(data && data?.result) {
           this.currentCourse = data?.result;
-          data?.result.authors.forEach((element: string) => {
-            if(!authors.includes(element)){
-              this.userService.getAuthor(element).subscribe((data) => this.authors.push(new FormControl(data.result)));
-              authors.push(element);
-            }
+          this.currentCourse.authors.forEach((element: string) => {
+            this.userService.getAuthor(element);
+            this.userService.author$.subscribe((data: any) => {
+              if(data && !this.authorIds.includes(data?.id)) {
+                this.authors.push(new FormControl(data))
+                this.authorIds.push(data.id)
+              }
+            })
           });
           this.courseForm = this.fb.group({
             title: [this.currentCourse?.title, Validators.required],
@@ -60,6 +62,7 @@ export class CourseFormComponent implements OnInit {
   courseForm?: any;
   authors = new FormArray<FormControl<Partial<{ name: string | null; id: string | null }> | null>>([]);
   submitBtnName = "Create course"
+  authorIds: string[] = [];
 
   get title(){ return this.courseForm.get('title') }
   get description(){ return this.courseForm.get('description') }
@@ -80,7 +83,13 @@ export class CourseFormComponent implements OnInit {
   addAuthor() {
     const author = this.newAuthor;
     if(author?.value && author.valid) {
-      this.userService.addAuthor(author.value).subscribe((data) => this.authors.push(new FormControl(data.result)));
+      this.userService.addAuthor(author.value)
+      this.userService.author$.subscribe((data:any) => {
+        if(data && !this.authorIds.includes(data?.id)) {
+          this.authors.push(new FormControl(data))
+          this.authorIds.push(data.id)
+        }
+      })
     };
   }
 }

@@ -10,7 +10,7 @@ export class UsersEffects {
     getUser$ = createEffect(() => this.actions$.pipe(
         ofType(requestGetUser),  
         mergeMap(() => this.userService.getUser().pipe(
-            map(user => (requestGetUserSuccess({user}))),
+            map(user => (requestGetUserSuccess({user: user?.result}))),
             catchError(error => of(requestGetUserFail({error})))
         ))
     ))
@@ -18,7 +18,7 @@ export class UsersEffects {
     getAuthor$ = createEffect(() => this.actions$.pipe(
         ofType(requestGetAuthor),  
         mergeMap((action) => this.userService.getAuthor(action.id).pipe(
-            map(author => (requestGetAuthorSuccess({author}))),
+            map(author => (requestGetAuthorSuccess({author: author?.result}))),
             catchError(error => of(requestGetAuthorFail(error)))
         ))
     ))
@@ -26,7 +26,7 @@ export class UsersEffects {
     addAuthor$ = createEffect(() => this.actions$.pipe(
         ofType(requestAddAuthor),  
         mergeMap((action) => this.userService.addAuthor(action.body).pipe(
-            map(() => (requestAddAuthorSuccess())),
+            map(author => (requestAddAuthorSuccess({author: author?.result}))),
             catchError(error => of(requestAddAuthorFail(error)))
         ))
     ))

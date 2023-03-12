@@ -7,5 +7,5 @@ export const requestGetAuthor = createAction('[User] Author', props<{id: string}
 export const requestGetAuthorSuccess = createAction('[User] Author Success', props<{author: any}>())
 export const requestGetAuthorFail = createAction('[User] Author Fail', props<{ error: string }>())
 export const requestAddAuthor = createAction('[User] Add Author', props<{body: any}>())
-export const requestAddAuthorSuccess = createAction('[User] Add Author Success')
+export const requestAddAuthorSuccess = createAction('[User] Add Author Success', props<{author: any}>())
 export const requestAddAuthorFail = createAction('[User] Add Author Fail', props<{ error: string }>())

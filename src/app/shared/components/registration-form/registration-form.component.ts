@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthStateFacade } from 'src/app/store/auth/auth.facade';
 import { emailValidator } from '../../utils/email-validator.directive';
 
 @Component({
@@ -16,7 +16,7 @@ export class RegistrationFormComponent {
     password: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthStateFacade) {}
 
   get name() { return this.registrationForm.get('name'); }
   get email() { return this.registrationForm.get('email'); }

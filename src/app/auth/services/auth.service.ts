@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SessionStorageService } from './session-storage.service';
 
 type AuthResponse = {
@@ -11,8 +11,6 @@ type AuthResponse = {
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthorized$$ = new BehaviorSubject<boolean>(this.sessionService.getToken().length > 0);
-  public isAuthorized$ = this.isAuthorized$$.asObservable();
   constructor( private httpClient: HttpClient, private sessionService: SessionStorageService ) {}
 
   login(loginInfo: string): Observable<any> {

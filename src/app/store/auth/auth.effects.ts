@@ -13,7 +13,7 @@ export class AuthEffects {
         ofType(requestLogin),  
         mergeMap((action) => this.authService.login(action.body).pipe(
             map(token => {
-                this.sessionService.setToken(token);
+                this.sessionService.setToken(token.result);
                 return requestLoginSuccess();
             }),
             catchError(error => of(requestLoginFail(error)))
@@ -23,7 +23,7 @@ export class AuthEffects {
     register$ = createEffect(() => this.actions$.pipe(
         ofType(requestRegister),  
         mergeMap((action) => this.authService.register(action.body).pipe(
-            map(() => (requestLogin(action.body))),
+            map(() => (requestLogin({body: action.body}))),
             catchError(error => of(requestRegisterFail(error)))
         ))
     ))
